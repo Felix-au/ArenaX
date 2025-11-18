@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="ArenaX - Play More. Pay Smart. Without ANY Limits. Multi-sport access platform connecting players with arenas through flexible subscription plans.">
+    <meta name="keywords"
+        content="sports, arena booking, multi-sport, subscription, India, cricket, badminton, football, tennis">
+    <meta name="author" content="ArenaX Team">
+    <title>ArenaX - Play More. Pay Smart. Without ANY Limits.</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="logo.png" alt="ArenaX Logo" class="nav-logo">
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu" role="list">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#discover" class="nav-link">Discover</a></li>
+                <li><a href="#plans" class="nav-link">Plans</a></li>
+                <li><a href="#community" class="nav-link">Community</a></li>
+                <li><a href="#rewards" class="nav-link">Rewards</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-profile" id="btnProfile" aria-label="View profile">Profile</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-logo-text">ArenaX</div>
+                <h1 class="hero-tagline" id="hero-heading">Play More. Pay Smart. Without ANY Limits.</h1>
+                <p class="hero-extended">Limited access, high costs, and fragmented booking prevent players from
+                    exploring sports, while arenas struggle to reach and engage users.</p>
+                <button class="btn-cta" id="btnGetStarted" aria-label="Discover arenas near you">Discover Arenas</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement Section -->
+    <section class="section problems" id="problems" aria-labelledby="problems-heading">
+        <div class="container">
+            <h2 class="section-title" id="problems-heading">The Problem We Solve</h2>
+            <div class="problems-grid" id="problemsGrid" role="list" aria-label="Problems ArenaX solves">
+                <!-- Problems will be dynamically rendered from data.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Opportunity Section -->
+    <section class="section market" id="market" aria-labelledby="market-heading">
+        <div class="container">
+            <h2 class="section-title" id="market-heading">Market Opportunity</h2>
+            <div class="market-hero">
+                <div class="market-stat" id="marketStat" data-target="100" aria-label="Market size: 100 billion dollars plus">$100B+</div>
+                <p class="market-subtitle">Global Sports Facility Market</p>
+            </div>
+            <div class="market-points" id="marketPoints" role="list" aria-label="Market opportunity highlights">
+                <!-- Market points will be dynamically rendered from data.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Flow Section -->
+    <section class="section solution" id="solution" aria-labelledby="solution-heading">
+        <div class="container">
+            <h2 class="section-title" id="solution-heading">How ArenaX Works</h2>
+            <div class="solution-flow" id="solutionFlow" role="list" aria-label="ArenaX solution flow steps">
+                <!-- Solution flow will be dynamically rendered from data.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Arena Discovery Section -->
+    <section class="section discover" id="discover" aria-labelledby="discover-heading">
+        <div class="container">
+            <h2 class="section-title" id="discover-heading">Discover Arenas</h2>
+            <form class="discover-filters" role="search" aria-label="Filter arenas">
+                <div class="filter-group">
+                    <label for="citySelect">City</label>
+                    <select id="citySelect" class="filter-select" aria-label="Filter by city">
+                        <option value="">All Cities</option>
+                    </select>
+                </div>
+                <div class="filter-group search-group">
+                    <label for="searchInput">Search</label>
+                    <input type="search" id="searchInput" class="filter-input" placeholder="Search arenas..."
+                        autocomplete="off" inputmode="search" aria-label="Search arenas by name or location">
+                    <button type="button" class="search-clear-btn" id="searchClearBtn"
+                        aria-label="Clear search">✕</button>
+                </div>
+            </form>
+            <div class="sport-filters" id="sportFilters" role="group" aria-label="Filter by sport">
+                <!-- Sport filter chips will be dynamically rendered -->
+            </div>
+            <div class="arenas-grid" id="arenasGrid" role="list" aria-label="Available arenas" aria-live="polite">
+                <!-- Arena cards will be dynamically rendered from data.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Trial Offers Section -->
+    <section class="section trial-offers" id="trial-offers" aria-labelledby="trial-offers-heading">
+        <div class="container">
+            <h2 class="section-title" id="trial-offers-heading">Try Before You Commit</h2>
+            <p class="section-subtitle">Experience different sports with our trial sessions. Equipment included at no extra
+                cost!</p>
+            <div class="trial-offers-grid" id="trialOffersGrid" role="list" aria-label="Trial session offers">
+                <!-- Trial offers will be dynamically rendered from data.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Plans Section -->
+    <section class="section plans" id="plans" aria-labelledby="plans-heading">
+        <div class="container">
+            <h2 class="section-title" id="plans-heading">Subscription Plans</h2>
+            <div class="plans-grid" id="plansGrid" role="list" aria-label="Available subscription plans">
+                <!-- Plans will be dynamically rendered from data.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="section community" id="community" aria-labelledby="community-heading">
+        <div class="container">
+            <h2 class="section-title" id="community-heading">Community</h2>
+            <div class="community-header">
+                <button class="btn-primary" id="btnCreatePost" aria-label="Create a new community post">Create Post</button>
+                <div class="community-filters" role="group" aria-label="Filter community posts">
+                    <label for="communityFilterSport" class="sr-only">Filter by sport</label>
+                    <select id="communityFilterSport" class="filter-select" aria-label="Filter posts by sport">
+                        <option value="">All Sports</option>
+                    </select>
+                    <label for="communityFilterCity" class="sr-only">Filter by city</label>
+                    <select id="communityFilterCity" class="filter-select" aria-label="Filter posts by city">
+                        <option value="">All Cities</option>
+                    </select>
+                </div>
+            </div>
+            <div class="community-feed" id="communityFeed" role="feed" aria-label="Community posts" aria-live="polite">
+                <!-- Community posts will be dynamically rendered -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Rewards Section -->
+    <section class="section rewards" id="rewards" aria-labelledby="rewards-heading">
+        <div class="container">
+            <h2 class="section-title" id="rewards-heading">Rewards & Achievements</h2>
+            <div class="rewards-header">
+                <div class="points-balance" role="status" aria-live="polite">
+                    <span class="points-label">Your Points</span>
+                    <span class="points-value" id="pointsValue" aria-label="Current points balance">0</span>
+                </div>
+                <div class="tier-indicator" role="status" aria-live="polite">
+                    <span class="tier-label">Tier</span>
+                    <span class="tier-value" id="tierValue" aria-label="Current tier level">Bronze</span>
+                    <div class="tier-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progress to next tier">
+                        <div class="tier-progress-bar" id="tierProgressBar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="rewards-grid" id="rewardsGrid" role="list" aria-label="Available rewards">
+                <!-- Rewards will be dynamically rendered -->
+            </div>
+            <div class="achievements-section">
+                <h3 class="subsection-title" id="achievements-heading">Achievements</h3>
+                <div class="achievements-grid" id="achievementsGrid" role="list" aria-labelledby="achievements-heading">
+                    <!-- Achievements will be dynamically rendered -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revenue Streams Section -->
+    <section class="section revenue" id="revenue" aria-labelledby="revenue-heading">
+        <div class="container">
+            <h2 class="section-title" id="revenue-heading">Revenue Streams</h2>
+            <div class="revenue-grid" id="revenueGrid" role="list" aria-label="Revenue sources">
+                <!-- Revenue streams will be dynamically rendered from data.js -->
+            </div>
+            <div class="scalability-section">
+                <h3 class="subsection-title" id="scalability-heading">Scalability</h3>
+                <div class="scalability-content" id="scalabilityContent" aria-labelledby="scalability-heading">
+                    <!-- Scalability content will be dynamically rendered -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantages Section -->
+    <section class="section advantages" id="advantages" aria-labelledby="advantages-heading">
+        <div class="container">
+            <h2 class="section-title" id="advantages-heading">Competitive Advantages</h2>
+            <div class="advantages-grid" id="advantagesGrid" role="list" aria-label="ArenaX competitive advantages">
+                <!-- Advantages will be dynamically rendered from data.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team" id="team" aria-labelledby="team-heading">
+        <div class="container">
+            <h2 class="section-title" id="team-heading">Our Team</h2>
+            <div class="team-grid" id="teamGrid" role="list" aria-label="Team members">
+                <!-- Team members will be dynamically rendered from data.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="section profile" id="profile" style="display: none;" aria-labelledby="profile-heading">
+        <div class="container">
+            <h2 class="section-title" id="profile-heading">My Profile</h2>
+            <div class="profile-content">
+                <!-- Profile Header with User Info -->
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">U</div>
+                    <div class="profile-info">
+                        <h3 id="profileName">Guest User</h3>
+                        <p id="profileCity">Bangalore</p>
+                        <p class="profile-member-since" id="profileMemberSince">Member since Nov 2025</p>
+                    </div>
+                </div>
+
+                <!-- Activity Summary -->
+                <div class="profile-activity-summary">
+                    <h3 class="subsection-title">Activity Summary</h3>
+                    <div class="activity-stats">
+                        <div class="activity-stat-card">
+                            <div class="activity-stat-icon">📅</div>
+                            <div class="activity-stat-value" id="activityBookingsCount">0</div>
+                            <div class="activity-stat-label">Total Bookings</div>
+                        </div>
+                        <div class="activity-stat-card">
+                            <div class="activity-stat-icon">🏆</div>
+                            <div class="activity-stat-value" id="activitySportsCount">0</div>
+                            <div class="activity-stat-label">Sports Tried</div>
+                        </div>
+                        <div class="activity-stat-card">
+                            <div class="activity-stat-icon">⭐</div>
+                            <div class="activity-stat-value" id="activityPointsCount">0</div>
+                            <div class="activity-stat-label">Reward Points</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferences Form -->
+                <div class="profile-preferences">
+                    <h3 class="subsection-title">Preferences</h3>
+                    <form class="profile-form" id="profileForm">
+                        <div class="form-group">
+                            <label for="profileNameInput" class="form-label">Name</label>
+                            <input type="text" id="profileNameInput" class="form-input" placeholder="Your name" required
+                                autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="profileCityInput" class="form-label">City</label>
+                            <select id="profileCityInput" class="form-input" required>
+                                <option value="">Select city</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Favorite Sports</label>
+                            <div id="profileSportsCheckboxes" class="checkbox-group">
+                                <!-- Sport checkboxes will be dynamically rendered -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileSkillLevel" class="form-label">Skill Level</label>
+                            <select id="profileSkillLevel" class="form-input">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Time Slots</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="timeSlotMorning" value="morning" class="form-checkbox">
+                                    <span>Morning (6 AM - 12 PM)</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="timeSlotAfternoon" value="afternoon"
+                                        class="form-checkbox">
+                                    <span>Afternoon (12 PM - 6 PM)</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="timeSlotEvening" value="evening" class="form-checkbox">
+                                    <span>Evening (6 PM - 12 AM)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileBudget" class="form-label">Budget Range (per hour)</label>
+                            <select id="profileBudget" class="form-input">
+                                <option value="0-500">₹0 - ₹500</option>
+                                <option value="500-1000">₹500 - ₹1000</option>
+                                <option value="1000-1500">₹1000 - ₹1500</option>
+                                <option value="1500+">₹1500+</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary btn-block">Save Preferences</button>
+                    </form>
+                </div>
+
+                <!-- My Bookings -->
+                <div class="my-bookings">
+                    <h3 class="subsection-title">My Bookings</h3>
+                    <div id="myBookingsList" class="bookings-list">
+                        <!-- Bookings will be dynamically rendered -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </option>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 ArenaX. All rights reserved.</p>
+            <p>Team: Sampurn Gupta, Harshit Soni, Aniket Mishra, Punya Mahajan, Raghav Bhargava</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="arenaDetailModal" style="display: none;" role="dialog" aria-labelledby="arenaDetailTitle" aria-modal="true">
+        <div class="modal-content">
+            <button class="modal-close" id="closeArenaModal" aria-label="Close arena details">&times;</button>
+            <div id="arenaDetailContent">
+                <!-- Arena details will be dynamically rendered -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="bookingModal" style="display: none;" role="dialog" aria-labelledby="bookingModalTitle" aria-modal="true">
+        <div class="modal-content">
+            <button class="modal-close" id="closeBookingModal" aria-label="Close booking form">&times;</button>
+            <h3 class="modal-title" id="bookingModalTitle">Book Arena</h3>
+            <div id="bookingArenaInfo" class="booking-arena-info"></div>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="bookingSport" class="form-label">Sport</label>
+                    <select id="bookingSport" class="form-input" required>
+                        <option value="">Select sport</option>
+                    </select>
+                    <small class="form-error" id="bookingSportError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="bookingDate" class="form-label">Date</label>
+                    <input type="date" id="bookingDate" class="form-input" required autocomplete="off">
+                    <small class="form-error" id="bookingDateError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="bookingTime" class="form-label">Time Slot</label>
+                    <div id="bookingTimeSlots" class="time-slots-grid">
+                        <!-- Time slots will be dynamically rendered -->
+                    </div>
+                    <input type="hidden" id="bookingTime" required>
+                    <small class="form-error" id="bookingTimeError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="bookingDuration" class="form-label">Duration (hours)</label>
+                    <select id="bookingDuration" class="form-input" required>
+                        <option value="1">1 hour</option>
+                        <option value="2">2 hours</option>
+                        <option value="3">3 hours</option>
+                    </select>
+                    <small class="form-error" id="bookingDurationError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="bookingPlayers" class="form-label">Number of Players</label>
+                    <input type="number" id="bookingPlayers" class="form-input" min="1" max="20" value="2" required
+                        inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+                    <small class="form-error" id="bookingPlayersError"></small>
+                </div>
+                <div class="form-group">
+                    <label class="form-checkbox-label">
+                        <input type="checkbox" id="bookingEquipment" class="form-checkbox">
+                        <span>Equipment Rental (₹<span id="equipmentCost">200</span>)</span>
+                    </label>
+                </div>
+                <div class="booking-summary">
+                    <div class="booking-summary-row">
+                        <span>Base Cost:</span>
+                        <span>₹<span id="bookingBaseCost">0</span></span>
+                    </div>
+                    <div class="booking-summary-row" id="equipmentCostRow" style="display: none;">
+                        <span>Equipment Rental:</span>
+                        <span>₹<span id="bookingEquipmentCost">0</span></span>
+                    </div>
+                    <div class="booking-summary-row booking-summary-total">
+                        <span>Total Cost:</span>
+                        <span>₹<span id="bookingTotalCost">0</span></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary btn-block">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="createPostModal" style="display: none;" role="dialog" aria-labelledby="createPostTitle" aria-modal="true">
+        <div class="modal-content">
+            <button class="modal-close" id="closePostModal" aria-label="Close create post form">&times;</button>
+            <h3 id="createPostTitle">Create Community Post</h3>
+            <form id="createPostForm">
+                <div class="form-group">
+                    <label for="postSport">Sport</label>
+                    <select id="postSport" class="form-input" required aria-required="true">
+                        <option value="">Select sport</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="postContent">Message</label>
+                    <textarea id="postContent" class="form-input" rows="4" maxlength="500"
+                        placeholder="Share your message..." required aria-required="true" aria-describedby="postCharCount"></textarea>
+                    <small class="char-count" id="postCharCount" aria-live="polite"><span>0</span>/500</small>
+                </div>
+                <button type="submit" class="btn-primary" aria-label="Submit community post">Post</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

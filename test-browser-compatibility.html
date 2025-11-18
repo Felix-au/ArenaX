@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArenaX - Browser Compatibility Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .pass {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        h1 {
+            color: #E55A2B;
+        }
+        h2 {
+            color: #2D3748;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 10px;
+        }
+        .browser-info {
+            background: #e0f2fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #E55A2B;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #D94E1F;
+        }
+    </style>
+</head>
+<body>
+    <h1>ArenaX Browser Compatibility Test</h1>
+    
+    <div class="browser-info" id="browserInfo">
+        <h3>Browser Information</h3>
+        <p id="userAgent"></p>
+        <p id="browserName"></p>
+        <p id="browserVersion"></p>
+    </div>
+
+    <div class="test-section">
+        <h2>1. CSS Features</h2>
+        <div id="cssTests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. JavaScript Features</h2>
+        <div id="jsTests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Storage APIs</h2>
+        <div id="storageTests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Modern Web APIs</h2>
+        <div id="apiTests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. Interactive Tests</h2>
+        <button onclick="testSmoothScroll()">Test Smooth Scroll</button>
+        <button onclick="testModal()">Test Modal</button>
+        <button onclick="testToast()">Test Toast Notification</button>
+        <div id="interactiveResults"></div>
+    </div>
+
+    <div id="testModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+        <div style="background:white; padding:30px; border-radius:12px; max-width:400px;">
+            <h3>Test Modal</h3>
+            <p>Modal is working correctly!</p>
+            <button onclick="closeTestModal()">Close</button>
+        </div>
+    </div>
+
+    <div id="toastContainer" style="position:fixed; top:20px; right:20px; z-index:10000;"></div>
+
+    <script>
+        // Display browser information
+        function detectBrowser() {
+            const ua = navigator.userAgent;
+            document.getElementById('userAgent').textContent = 'User Agent: ' + ua;
+            
+            let browserName = 'Unknown';
+            let browserVersion = 'Unknown';
+            
+            if (ua.indexOf('Firefox') > -1) {
+                browserName = 'Mozilla Firefox';
+                browserVersion = ua.match(/Firefox\/([0-9.]+)/)[1];
+            } else if (ua.indexOf('Edg') > -1) {
+                browserName = 'Microsoft Edge';
+                browserVersion = ua.match(/Edg\/([0-9.]+)/)[1];
+            } else if (ua.indexOf('Chrome') > -1) {
+                browserName = 'Google Chrome';
+                browserVersion = ua.match(/Chrome\/([0-9.]+)/)[1];
+            } else if (ua.indexOf('Safari') > -1) {
+                browserName = 'Apple Safari';
+                browserVersion = ua.match(/Version\/([0-9.]+)/)[1];
+            }
+            
+            document.getElementById('browserName').textContent = 'Browser: ' + browserName;
+            document.getElementById('browserVersion').textContent = 'Version: ' + browserVersion;
+        }
+
+        // Test CSS features
+        function testCSSFeatures() {
+            const tests = [
+                { name: 'CSS Grid', test: () => CSS.supports('display', 'grid') },
+                { name: 'CSS Flexbox', test: () => CSS.supports('display', 'flex') },
+                { name: 'CSS Custom Properties', test: () => CSS.supports('--test', '0') },
+                { name: 'CSS Transforms', test: () => CSS.supports('transform', 'translateX(0)') },
+                { name: 'CSS Transitions', test: () => CSS.supports('transition', 'all 0.3s') },
+                { name: 'CSS Animations', test: () => CSS.supports('animation', 'test 1s') },
+                { name: 'CSS calc()', test: () => CSS.supports('width', 'calc(100% - 20px)') }
+            ];
+            
+            const container = document.getElementById('cssTests');
+            tests.forEach(test => {
+                const result = test.test();
+                container.innerHTML += `<div class="test-result ${result ? 'pass' : 'fail'}">${test.name}: ${result ? 'PASS' : 'FAIL'}</div>`;
+            });
+        }
+
+        // Test JavaScript features
+        function testJSFeatures() {
+            const tests = [
+                { name: 'ES6 Arrow Functions', test: () => { try { eval('() => {}'); return true; } catch(e) { return false; } } },
+                { name: 'ES6 Classes', test: () => { try { eval('class Test {}'); return true; } catch(e) { return false; } } },
+                { name: 'ES6 Template Literals', test: () => { try { eval('`test`'); return true; } catch(e) { return false; } } },
+                { name: 'ES6 Destructuring', test: () => { try { eval('const {a} = {a:1}'); return true; } catch(e) { return false; } } },
+                { name: 'ES6 Spread Operator', test: () => { try { eval('[...[]'); return true; } catch(e) { return false; } } },
+                { name: 'Promise', test: () => typeof Promise !== 'undefined' },
+                { name: 'Fetch API', test: () => typeof fetch !== 'undefined' },
+                { name: 'Array.from', test: () => typeof Array.from === 'function' },
+                { name: 'Object.assign', test: () => typeof Object.assign === 'function' }
+            ];
+            
+            const container = document.getElementById('jsTests');
+            tests.forEach(test => {
+                const result = test.test();
+                container.innerHTML += `<div class="test-result ${result ? 'pass' : 'fail'}">${test.name}: ${result ? 'PASS' : 'FAIL'}</div>`;
+            });
+        }
+
+        // Test storage APIs
+        function testStorageAPIs() {
+            const tests = [
+                { name: 'localStorage', test: () => {
+                    try {
+                        localStorage.setItem('test', 'test');
+                        localStorage.removeItem('test');
+                        return true;
+                    } catch(e) {
+                        return false;
+                    }
+                }},
+                { name: 'sessionStorage', test: () => {
+                    try {
+                        sessionStorage.setItem('test', 'test');
+                        sessionStorage.removeItem('test');
+                        return true;
+                    } catch(e) {
+                        return false;
+                    }
+                }},
+                { name: 'JSON.parse', test: () => typeof JSON.parse === 'function' },
+                { name: 'JSON.stringify', test: () => typeof JSON.stringify === 'function' }
+            ];
+            
+            const container = document.getElementById('storageTests');
+            tests.forEach(test => {
+                const result = test.test();
+                container.innerHTML += `<div class="test-result ${result ? 'pass' : 'fail'}">${test.name}: ${result ? 'PASS' : 'FAIL'}</div>`;
+            });
+        }
+
+        // Test modern web APIs
+        function testWebAPIs() {
+            const tests = [
+                { name: 'IntersectionObserver', test: () => typeof IntersectionObserver !== 'undefined' },
+                { name: 'requestAnimationFrame', test: () => typeof requestAnimationFrame !== 'undefined' },
+                { name: 'addEventListener', test: () => typeof document.addEventListener === 'function' },
+                { name: 'querySelector', test: () => typeof document.querySelector === 'function' },
+                { name: 'querySelectorAll', test: () => typeof document.querySelectorAll === 'function' },
+                { name: 'classList', test: () => 'classList' in document.createElement('div') },
+                { name: 'dataset', test: () => 'dataset' in document.createElement('div') }
+            ];
+            
+            const container = document.getElementById('apiTests');
+            tests.forEach(test => {
+                const result = test.test();
+                container.innerHTML += `<div class="test-result ${result ? 'pass' : 'fail'}">${test.name}: ${result ? 'PASS' : 'FAIL'}</div>`;
+            });
+        }
+
+        // Interactive tests
+        function testSmoothScroll() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showResult('Smooth scroll triggered. Check if page scrolled smoothly.');
+        }
+
+        function testModal() {
+            const modal = document.getElementById('testModal');
+            modal.style.display = 'flex';
+        }
+
+        function closeTestModal() {
+            const modal = document.getElementById('testModal');
+            modal.style.display = 'none';
+        }
+
+        function testToast() {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.style.cssText = 'background:#059669; color:white; padding:16px 24px; border-radius:8px; margin-bottom:10px; box-shadow:0 4px 16px rgba(0,0,0,0.15); animation:slideIn 0.3s ease-out;';
+            toast.textContent = 'Test toast notification!';
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s';
+                setTimeout(() => container.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        function showResult(message) {
+            const container = document.getElementById('interactiveResults');
+            container.innerHTML = `<div class="test-result pass">${message}</div>`;
+        }
+
+        // Run all tests on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            detectBrowser();
+            testCSSFeatures();
+            testJSFeatures();
+            testStorageAPIs();
+            testWebAPIs();
+        });
+    </script>
+</body>
+</html>

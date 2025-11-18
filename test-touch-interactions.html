@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ArenaX - Touch Interaction Testing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f8f9fa;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            background: #E55A2B;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .test-section h2 {
+            color: #2D3748;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .test-section p {
+            color: #4a5568;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Touch Target Tests */
+        .touch-target-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .touch-target {
+            background: #E55A2B;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .touch-target:active {
+            transform: scale(0.95);
+            background: #D94E1F;
+        }
+        
+        .touch-target.small {
+            min-height: 30px;
+            min-width: 30px;
+            font-size: 12px;
+        }
+        
+        .touch-target.medium {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        .touch-target.large {
+            min-height: 60px;
+            min-width: 60px;
+            font-size: 18px;
+        }
+        
+        .touch-target.pass {
+            background: #059669;
+        }
+        
+        .touch-target.fail {
+            background: #DC2626;
+        }
+        
+        .size-label {
+            display: block;
+            font-size: 12px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+        
+        /* Swipe Test */
+        .swipe-area {
+            background: linear-gradient(135deg, #E55A2B 0%, #D94E1F 100%);
+            color: white;
+            padding: 60px 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            touch-action: pan-x;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .swipe-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .swipe-indicator.active {
+            opacity: 1;
+        }
+        
+        /* Scroll Test */
+        .scroll-container {
+            height: 300px;
+            overflow-y: auto;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .scroll-content {
+            padding: 20px;
+        }
+        
+        .scroll-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #E55A2B;
+        }
+        
+        /* Tap Feedback Test */
+        .tap-feedback-area {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+        
+        .tap-box {
+            aspect-ratio: 1;
+            background: #E2E8F0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .tap-box:active {
+            background: #059669;
+            transform: scale(0.9);
+        }
+        
+        .tap-box.tapped {
+            background: #059669;
+            color: white;
+        }
+        
+        .tap-count {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #E55A2B;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Long Press Test */
+        .long-press-button {
+            background: #E55A2B;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .long-press-button:active {
+            background: #D94E1F;
+        }
+        
+        .long-press-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: #059669;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        /* Pinch Zoom Test */
+        .pinch-area {
+            background: #f8f9fa;
+            border: 2px dashed #E2E8F0;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            touch-action: pinch-zoom;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pinch-content {
+            transform-origin: center;
+            transition: transform 0.1s;
+        }
+        
+        .pinch-content img {
+            max-width: 200px;
+            border-radius: 8px;
+        }
+        
+        /* Results */
+        .result-box {
+            background: #e0f2fe;
+            border-left: 4px solid #2563EB;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .result-box.success {
+            background: #d1fae5;
+            border-color: #059669;
+        }
+        
+        .result-box.error {
+            background: #fee2e2;
+            border-color: #DC2626;
+        }
+        
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .status-pass {
+            background: #059669;
+            color: white;
+        }
+        
+        .status-fail {
+            background: #DC2626;
+            color: white;
+        }
+        
+        .status-warning {
+            background: #D97706;
+            color: white;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: #fef3c7;
+            border-left: 4px solid #D97706;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .info-box strong {
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 ArenaX Touch Interaction Testing</h1>
+        <p>Test touch interactions, gestures, and mobile usability</p>
+    </div>
+    
+    <div class="info-box">
+        <strong>📱 Best viewed on a touch device!</strong><br>
+        For accurate testing, open this page on a smartphone or tablet. Mouse interactions will work but won't fully simulate touch behavior.
+    </div>
+    
+    <!-- Touch Target Size Test -->
+    <div class="test-section">
+        <h2>1. Touch Target Size Test <span class="status-badge status-pass">WCAG 2.1</span></h2>
+        <p>WCAG 2.1 requires touch targets to be at least 44×44 CSS pixels. Tap each button to test.</p>
+        
+        <div class="touch-target-grid">
+            <button class="touch-target small fail" onclick="testTouchTarget(this, 30)">
+                Too Small
+                <span class="size-label">30×30px ❌</span>
+            </button>
+            <button class="touch-target small fail" onclick="testTouchTarget(this, 40)">
+                Still Small
+                <span class="size-label">40×40px ❌</span>
+            </button>
+            <button class="touch-target medium pass" onclick="testTouchTarget(this, 44)">
+                Minimum
+                <span class="size-label">44×44px ✅</span>
+            </button>
+            <button class="touch-target medium pass" onclick="testTouchTarget(this, 48)">
+                Good
+                <span class="size-label">48×48px ✅</span>
+            </button>
+            <button class="touch-target large pass" onclick="testTouchTarget(this, 60)">
+                Excellent
+                <span class="size-label">60×60px ✅</span>
+            </button>
+        </div>
+        
+        <div id="touchTargetResult" class="result-box" style="display:none;"></div>
+    </div>
+    
+    <!-- Tap Feedback Test -->
+    <div class="test-section">
+        <h2>2. Tap Feedback Test</h2>
+        <p>Tap the boxes below. They should provide immediate visual feedback.</p>
+        
+        <div class="tap-feedback-area">
+            <div class="tap-box" onclick="handleTap(this)">
+                👆
+                <span class="tap-count">0</span>
+            </div>
+            <div class="tap-box" onclick="handleTap(this)">
+                ✋
+                <span class="tap-count">0</span>
+            </div>
+            <div class="tap-box" onclick="handleTap(this)">
+                👍
+                <span class="tap-count">0</span>
+            </div>
+            <div class="tap-box" onclick="handleTap(this)">
+                ☝️
+                <span class="tap-count">0</span>
+            </div>
+        </div>
+        
+        <div id="tapResult" class="result-box" style="display:none;"></div>
+    </div>
+    
+    <!-- Swipe Gesture Test -->
+    <div class="test-section">
+        <h2>3. Swipe Gesture Test</h2>
+        <p>Swipe left or right on the area below to test swipe detection.</p>
+        
+        <div class="swipe-area" id="swipeArea">
+            Swipe Left or Right
+            <div class="swipe-indicator" id="swipeLeft">⬅️</div>
+            <div class="swipe-indicator" id="swipeRight">➡️</div>
+        </div>
+        
+        <div id="swipeResult" class="result-box" style="display:none;"></div>
+    </div>
+    
+    <!-- Scroll Test -->
+    <div class="test-section">
+        <h2>4. Smooth Scroll Test</h2>
+        <p>Scroll through the content below. It should feel smooth and responsive.</p>
+        
+        <div class="scroll-container" id="scrollContainer">
+            <div class="scroll-content">
+                <div class="scroll-item">📱 Item 1 - Scroll smoothly</div>
+                <div class="scroll-item">📱 Item 2 - No lag or jank</div>
+                <div class="scroll-item">📱 Item 3 - Responsive touch</div>
+                <div class="scroll-item">📱 Item 4 - Momentum scrolling</div>
+                <div class="scroll-item">📱 Item 5 - Smooth deceleration</div>
+                <div class="scroll-item">📱 Item 6 - Native feel</div>
+                <div class="scroll-item">📱 Item 7 - Good performance</div>
+                <div class="scroll-item">📱 Item 8 - No stuttering</div>
+                <div class="scroll-item">📱 Item 9 - Excellent UX</div>
+                <div class="scroll-item">📱 Item 10 - End of list</div>
+            </div>
+        </div>
+        
+        <div id="scrollResult" class="result-box" style="display:none;"></div>
+    </div>
+    
+    <!-- Long Press Test -->
+    <div class="test-section">
+        <h2>5. Long Press Test</h2>
+        <p>Press and hold the button below for 2 seconds.</p>
+        
+        <button class="long-press-button" id="longPressButton">
+            Press and Hold
+            <div class="long-press-progress" id="longPressProgress"></div>
+        </button>
+        
+        <div id="longPressResult" class="result-box" style="display:none;"></div>
+    </div>
+    
+    <!-- Double Tap Test -->
+    <div class="test-section">
+        <h2>6. Double Tap Test</h2>
+        <p>Double tap the button below quickly.</p>
+        
+        <button class="touch-target large pass" onclick="handleDoubleTap()" style="width: 100%;">
+            Double Tap Me
+        </button>
+        
+        <div id="doubleTapResult" class="result-box" style="display:none;"></div>
+    </div>
+    
+    <script>
+        // Touch Target Test
+        function testTouchTarget(button, size) {
+            const result = document.getElementById('touchTargetResult');
+            const isValid = size >= 44;
+            
+            result.style.display = 'block';
+            result.className = isValid ? 'result-box success' : 'result-box error';
+            result.innerHTML = `
+                <strong>${isValid ? '✅ Valid' : '❌ Invalid'} Touch Target</strong><br>
+                Size: ${size}×${size}px<br>
+                ${isValid ? 'Meets WCAG 2.1 requirements (≥44×44px)' : 'Too small! Should be at least 44×44px'}
+            `;
+        }
+        
+        // Tap Feedback Test
+        function handleTap(box) {
+            const countElement = box.querySelector('.tap-count');
+            const currentCount = parseInt(countElement.textContent);
+            const newCount = currentCount + 1;
+            
+            countElement.textContent = newCount;
+            box.classList.add('tapped');
+            
+            setTimeout(() => {
+                box.classList.remove('tapped');
+            }, 200);
+            
+            const result = document.getElementById('tapResult');
+            result.style.display = 'block';
+            result.className = 'result-box success';
+            result.innerHTML = `
+                <strong>✅ Tap Registered!</strong><br>
+                Visual feedback provided immediately. Total taps: ${newCount}
+            `;
+        }
+        
+        // Swipe Gesture Test
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        const swipeArea = document.getElementById('swipeArea');
+        const swipeLeft = document.getElementById('swipeLeft');
+        const swipeRight = document.getElementById('swipeRight');
+        
+        swipeArea.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        swipeArea.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            const result = document.getElementById('swipeResult');
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swiped left
+                    swipeLeft.classList.add('active');
+                    setTimeout(() => swipeLeft.classList.remove('active'), 500);
+                    
+                    result.style.display = 'block';
+                    result.className = 'result-box success';
+                    result.innerHTML = '<strong>⬅️ Swipe Left Detected!</strong><br>Gesture recognized successfully.';
+                } else {
+                    // Swiped right
+                    swipeRight.classList.add('active');
+                    setTimeout(() => swipeRight.classList.remove('active'), 500);
+                    
+                    result.style.display = 'block';
+                    result.className = 'result-box success';
+                    result.innerHTML = '<strong>➡️ Swipe Right Detected!</strong><br>Gesture recognized successfully.';
+                }
+            }
+        }
+        
+        // Scroll Test
+        const scrollContainer = document.getElementById('scrollContainer');
+        let scrollCount = 0;
+        
+        scrollContainer.addEventListener('scroll', () => {
+            scrollCount++;
+            const result = document.getElementById('scrollResult');
+            result.style.display = 'block';
+            result.className = 'result-box success';
+            result.innerHTML = `
+                <strong>✅ Scroll Working!</strong><br>
+                Scroll events: ${scrollCount}<br>
+                Scroll position: ${Math.round(scrollContainer.scrollTop)}px
+            `;
+        });
+        
+        // Long Press Test
+        const longPressButton = document.getElementById('longPressButton');
+        const longPressProgress = document.getElementById('longPressProgress');
+        let longPressTimer = null;
+        let longPressStartTime = 0;
+        let longPressInterval = null;
+        
+        longPressButton.addEventListener('touchstart', startLongPress);
+        longPressButton.addEventListener('touchend', endLongPress);
+        longPressButton.addEventListener('touchcancel', endLongPress);
+        
+        // Also support mouse for desktop testing
+        longPressButton.addEventListener('mousedown', startLongPress);
+        longPressButton.addEventListener('mouseup', endLongPress);
+        longPressButton.addEventListener('mouseleave', endLongPress);
+        
+        function startLongPress() {
+            longPressStartTime = Date.now();
+            longPressProgress.style.width = '0%';
+            
+            longPressInterval = setInterval(() => {
+                const elapsed = Date.now() - longPressStartTime;
+                const progress = Math.min((elapsed / 2000) * 100, 100);
+                longPressProgress.style.width = progress + '%';
+            }, 50);
+            
+            longPressTimer = setTimeout(() => {
+                const result = document.getElementById('longPressResult');
+                result.style.display = 'block';
+                result.className = 'result-box success';
+                result.innerHTML = '<strong>✅ Long Press Successful!</strong><br>Held for 2 seconds.';
+                
+                // Vibrate if supported
+                if (navigator.vibrate) {
+                    navigator.vibrate(200);
+                }
+            }, 2000);
+        }
+        
+        function endLongPress() {
+            if (longPressTimer) {
+                clearTimeout(longPressTimer);
+                longPressTimer = null;
+            }
+            if (longPressInterval) {
+                clearInterval(longPressInterval);
+                longPressInterval = null;
+            }
+            
+            const elapsed = Date.now() - longPressStartTime;
+            longPressProgress.style.width = '0%';
+            
+            if (elapsed < 2000 && elapsed > 100) {
+                const result = document.getElementById('longPressResult');
+                result.style.display = 'block';
+                result.className = 'result-box error';
+                result.innerHTML = `<strong>❌ Too Short!</strong><br>Held for ${(elapsed/1000).toFixed(1)}s. Need 2s.`;
+            }
+        }
+        
+        // Double Tap Test
+        let lastTapTime = 0;
+        let tapCount = 0;
+        
+        function handleDoubleTap() {
+            const currentTime = Date.now();
+            const timeDiff = currentTime - lastTapTime;
+            
+            if (timeDiff < 300 && timeDiff > 0) {
+                // Double tap detected
+                const result = document.getElementById('doubleTapResult');
+                result.style.display = 'block';
+                result.className = 'result-box success';
+                result.innerHTML = `
+                    <strong>✅ Double Tap Detected!</strong><br>
+                    Time between taps: ${timeDiff}ms<br>
+                    (Should be < 300ms)
+                `;
+                tapCount = 0;
+            } else {
+                tapCount++;
+                const result = document.getElementById('doubleTapResult');
+                result.style.display = 'block';
+                result.className = 'result-box';
+                result.innerHTML = `
+                    <strong>Single Tap</strong><br>
+                    Tap again quickly for double tap!
+                `;
+            }
+            
+            lastTapTime = currentTime;
+        }
+        
+        // Detect touch device
+        window.addEventListener('DOMContentLoaded', () => {
+            const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            
+            if (!isTouchDevice) {
+                const infoBox = document.querySelector('.info-box');
+                infoBox.innerHTML = `
+                    <strong>⚠️ Mouse Device Detected</strong><br>
+                    You're using a mouse/trackpad. For accurate touch testing, please open this page on a smartphone or tablet.
+                    Mouse interactions will work but won't fully simulate touch behavior.
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

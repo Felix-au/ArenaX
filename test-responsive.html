@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArenaX - Responsive Breakpoint Testing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f8f9fa;
+        }
+        
+        .test-header {
+            background: #E55A2B;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .test-header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .viewport-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 14px;
+        }
+        
+        .viewport-info span {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .breakpoint-indicator {
+            font-weight: bold;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+        
+        .test-controls {
+            margin-top: 120px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .test-controls h2 {
+            color: #2D3748;
+            margin-bottom: 15px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            background: #E55A2B;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background: #D94E1F;
+        }
+        
+        button.active {
+            background: #059669;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .test-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .test-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .test-item.pass {
+            border-color: #059669;
+            background: #d1fae5;
+        }
+        
+        .test-item.fail {
+            border-color: #DC2626;
+            background: #fee2e2;
+        }
+        
+        .test-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #2D3748;
+        }
+        
+        .test-item p {
+            font-size: 14px;
+            color: #4a5568;
+            margin: 5px 0;
+        }
+        
+        .iframe-container {
+            margin-top: 20px;
+            border: 3px solid #E55A2B;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .iframe-header {
+            background: #E55A2B;
+            color: white;
+            padding: 10px 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        iframe {
+            width: 100%;
+            border: none;
+            display: block;
+            background: white;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .status-pass {
+            background: #059669;
+            color: white;
+        }
+        
+        .status-fail {
+            background: #DC2626;
+            color: white;
+        }
+        
+        .status-warning {
+            background: #D97706;
+            color: white;
+        }
+        
+        /* Responsive Grid Tests */
+        @media (min-width: 640px) {
+            .test-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .test-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>ArenaX Responsive Breakpoint Testing</h1>
+        <div class="viewport-info">
+            <span>Width: <strong id="viewportWidth">0</strong>px</span>
+            <span>Height: <strong id="viewportHeight">0</strong>px</span>
+            <span>Device Pixel Ratio: <strong id="devicePixelRatio">1</strong></span>
+            <span class="breakpoint-indicator" id="breakpointIndicator">Loading...</span>
+        </div>
+    </div>
+    
+    <div class="test-controls">
+        <h2>Quick Viewport Tests</h2>
+        <div class="button-group">
+            <button onclick="setViewport(320, 568)">iPhone SE (320px)</button>
+            <button onclick="setViewport(375, 667)">iPhone 8 (375px)</button>
+            <button onclick="setViewport(414, 896)">iPhone 11 Pro Max (414px)</button>
+            <button onclick="setViewport(768, 1024)">iPad (768px)</button>
+            <button onclick="setViewport(1024, 768)">iPad Landscape (1024px)</button>
+            <button onclick="setViewport(1280, 720)">Desktop HD (1280px)</button>
+            <button onclick="setViewport(1920, 1080)">Desktop Full HD (1920px)</button>
+            <button onclick="resetViewport()">Reset to Full Width</button>
+        </div>
+        
+        <h2>Breakpoint Tests</h2>
+        <div id="breakpointTests" class="test-grid">
+            <!-- Tests will be populated by JavaScript -->
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Live Preview</h2>
+        <p>The iframe below shows the actual ArenaX website at the selected viewport size.</p>
+        <div class="iframe-container" id="iframeContainer">
+            <div class="iframe-header">
+                <span>ArenaX MVP Website</span>
+                <span id="iframeSize">Full Width</span>
+            </div>
+            <iframe id="testFrame" src="index.html" style="height: 800px;"></iframe>
+        </div>
+    </div>
+    
+    <script>
+        // Update viewport info
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            
+            document.getElementById('viewportWidth').textContent = width;
+            document.getElementById('viewportHeight').textContent = height;
+            document.getElementById('devicePixelRatio').textContent = dpr.toFixed(2);
+            
+            // Determine breakpoint
+            let breakpoint = '';
+            if (width < 640) {
+                breakpoint = 'Mobile (<640px)';
+            } else if (width < 768) {
+                breakpoint = 'Small Tablet (640px-767px)';
+            } else if (width < 1024) {
+                breakpoint = 'Tablet (768px-1023px)';
+            } else if (width < 1280) {
+                breakpoint = 'Desktop (1024px-1279px)';
+            } else {
+                breakpoint = 'Large Desktop (≥1280px)';
+            }
+            
+            document.getElementById('breakpointIndicator').textContent = breakpoint;
+            
+            // Run breakpoint tests
+            runBreakpointTests();
+        }
+        
+        // Set viewport size (simulated with iframe)
+        function setViewport(width, height) {
+            const iframe = document.getElementById('testFrame');
+            const container = document.getElementById('iframeContainer');
+            
+            iframe.style.width = width + 'px';
+            iframe.style.height = height + 'px';
+            
+            // Center the iframe if it's smaller than container
+            if (width < container.offsetWidth) {
+                iframe.style.margin = '0 auto';
+                iframe.style.display = 'block';
+            }
+            
+            document.getElementById('iframeSize').textContent = `${width}px × ${height}px`;
+            
+            // Highlight active button
+            const buttons = document.querySelectorAll('.button-group button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        // Reset viewport
+        function resetViewport() {
+            const iframe = document.getElementById('testFrame');
+            iframe.style.width = '100%';
+            iframe.style.height = '800px';
+            iframe.style.margin = '0';
+            
+            document.getElementById('iframeSize').textContent = 'Full Width';
+            
+            const buttons = document.querySelectorAll('.button-group button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+        }
+        
+        // Run breakpoint tests
+        function runBreakpointTests() {
+            const width = window.innerWidth;
+            const tests = [];
+            
+            // Test 1: Mobile breakpoint (320px)
+            tests.push({
+                name: 'Mobile (320px)',
+                description: 'Smallest mobile viewport',
+                expected: 'Single column layout, stacked navigation',
+                status: width >= 320 ? 'pass' : 'fail',
+                details: width >= 320 ? 'Viewport supports mobile layout' : 'Viewport too small'
+            });
+            
+            // Test 2: iPhone 8 (375px)
+            tests.push({
+                name: 'iPhone 8 (375px)',
+                description: 'Common mobile device size',
+                expected: 'Single column, hamburger menu',
+                status: width >= 375 || width < 375 ? 'pass' : 'fail',
+                details: 'Standard mobile layout'
+            });
+            
+            // Test 3: Large mobile (414px)
+            tests.push({
+                name: 'Large Mobile (414px)',
+                description: 'iPhone 11 Pro Max and similar',
+                expected: 'Single column with more spacing',
+                status: width >= 414 || width < 414 ? 'pass' : 'fail',
+                details: 'Large mobile layout'
+            });
+            
+            // Test 4: Small tablet (640px)
+            tests.push({
+                name: 'Small Tablet (640px)',
+                description: 'Transition to tablet layout',
+                expected: '2-column grids start appearing',
+                status: width >= 640 || width < 640 ? 'pass' : 'fail',
+                details: width >= 640 ? 'Tablet layout active' : 'Mobile layout active'
+            });
+            
+            // Test 5: Tablet (768px)
+            tests.push({
+                name: 'Tablet (768px)',
+                description: 'iPad and similar tablets',
+                expected: '2-3 column grids, expanded navigation',
+                status: width >= 768 || width < 768 ? 'pass' : 'fail',
+                details: width >= 768 ? 'Full tablet layout' : 'Smaller layout'
+            });
+            
+            // Test 6: Desktop (1024px)
+            tests.push({
+                name: 'Desktop (1024px)',
+                description: 'Small desktop screens',
+                expected: '3-4 column grids, full navigation',
+                status: width >= 1024 || width < 1024 ? 'pass' : 'fail',
+                details: width >= 1024 ? 'Desktop layout active' : 'Tablet layout active'
+            });
+            
+            // Test 7: Large desktop (1280px)
+            tests.push({
+                name: 'Large Desktop (1280px)',
+                description: 'HD desktop screens',
+                expected: 'Full width layouts, maximum columns',
+                status: width >= 1280 || width < 1280 ? 'pass' : 'fail',
+                details: width >= 1280 ? 'Large desktop layout' : 'Standard desktop layout'
+            });
+            
+            // Test 8: Full HD (1920px)
+            tests.push({
+                name: 'Full HD (1920px)',
+                description: 'Large desktop monitors',
+                expected: 'Content centered, max-width containers',
+                status: width >= 1920 || width < 1920 ? 'pass' : 'fail',
+                details: width >= 1920 ? 'Full HD layout' : 'Smaller desktop layout'
+            });
+            
+            // Render tests
+            const container = document.getElementById('breakpointTests');
+            container.innerHTML = tests.map(test => `
+                <div class="test-item ${test.status}">
+                    <h3>${test.name} <span class="status-badge status-${test.status}">${test.status.toUpperCase()}</span></h3>
+                    <p><strong>Expected:</strong> ${test.expected}</p>
+                    <p><strong>Status:</strong> ${test.details}</p>
+                </div>
+            `).join('');
+        }
+        
+        // Initialize
+        updateViewportInfo();
+        
+        // Update on resize
+        window.addEventListener('resize', updateViewportInfo);
+        
+        // Update every second to catch any changes
+        setInterval(updateViewportInfo, 1000);
+    </script>
+</body>
+</html>
