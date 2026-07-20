@@ -1,0 +1,21 @@
+{
+  "name": "ArenaX - Multi-Sport Access Platform",
+  "short_name": "ArenaX",
+  "description": "Multi-sport access platform connecting players with sports arenas through flexible subscription plans.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#E55A2B",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

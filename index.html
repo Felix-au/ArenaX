@@ -33,9 +33,14 @@
     <meta name="twitter:description" content="Multi-sport access platform connecting players with sports arenas through flexible subscription plans across major metros in India.">
     <meta name="twitter:image" content="https://arenax.in/logo+tagline.png">
 
+    <meta name="theme-color" content="#E55A2B">
+
     <title>ArenaX - Play More. Pay Smart. Without ANY Limits.</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="preload" href="logo.png" as="image">
+    <link rel="preload" href="styles.css" as="style">
     <link rel="stylesheet" href="styles.css">
 
     <!-- Structured Data (JSON-LD) -->
@@ -66,6 +71,86 @@
             "https://github.com/Felix-au"
           ],
           "description": "ArenaX provides flexible multi-sport access passes, trial sessions with included equipment, and community player matching across India."
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://arenax.in/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://arenax.in/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Discover Arenas",
+              "item": "https://arenax.in/#discover"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Trial Sessions",
+              "item": "https://arenax.in/#trial-offers"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Subscription Plans",
+              "item": "https://arenax.in/#plans"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "Community",
+              "item": "https://arenax.in/#community"
+            }
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "@id": "https://arenax.in/#plans-catalog",
+          "name": "ArenaX Subscription Plans",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Flex Pass",
+              "description": "4 visits/month across flexible sports facilities."
+            },
+            {
+              "@type": "Offer",
+              "name": "Pro Player Pass",
+              "description": "12 visits/month with priority booking and trial sessions."
+            },
+            {
+              "@type": "Offer",
+              "name": "Elite Unlimited",
+              "description": "Unlimited partner arena access with equipment included."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://arenax.in/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is ArenaX?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ArenaX is a multi-sport subscription platform that connects sports enthusiasts with turf grounds, badminton courts, swimming pools, and tennis courts across major Indian cities under flexible monthly plans."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is sports equipment included in trial sessions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, all ArenaX trial sessions include required sports equipment (rackets, balls, protective gear) at no extra cost."
+              }
+            }
+          ]
         }
       ]
     }
@@ -77,7 +162,7 @@
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="logo.png" alt="ArenaX Logo" class="nav-logo">
+                <img src="logo.png" alt="ArenaX - Multi-Sport Booking & Subscription Platform Logo" class="nav-logo" width="120" height="40">
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
                 <span aria-hidden="true"></span>
@@ -103,7 +188,7 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-logo-text">ArenaX</div>
-                <h1 class="hero-tagline" id="hero-heading">Play More. Play Smart. Without ANY Limits.</h1>
+                <h1 class="hero-tagline" id="hero-heading">ArenaX - Play More. Play Smart. Without ANY Limits.</h1>
                 <p class="hero-extended">Limited access, high costs, and fragmented booking prevent players from
                     exploring sports, while arenas struggle to reach and engage users.</p>
                 <button class="btn-cta" id="btnGetStarted" aria-label="Discover arenas near you">Discover Arenas</button>
