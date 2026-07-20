@@ -8,6 +8,30 @@
     box-sizing: border-box;
 }
 
+/* Custom Selection & Scrollbar Styles */
+::selection {
+    background-color: #E55A2B;
+    color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F8F9FA;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E55A2B;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #D94E1F;
+}
+
 /* Screen reader only class for accessibility */
 .sr-only {
     position: absolute;
