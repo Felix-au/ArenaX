@@ -3,4 +3,4 @@ Allow: /
 Disallow: /DocumentaionInstruct/
 
 # Sitemap location
-Sitemap: https://arenax.in/sitemap.xml
+Sitemap: https://arenax.felixau.in/sitemap.xml
