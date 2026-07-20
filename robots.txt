@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /DocumentaionInstruct/
+
+# Sitemap location
+Sitemap: https://arenax.in/sitemap.xml
