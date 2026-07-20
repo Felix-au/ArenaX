@@ -129,7 +129,7 @@ graph TD
                                   ^
                                   |
 +-------------------------------------------------------------------+
-|                        data.js (Datastore)                         |
+|                        data.js (Datastore)                        |
 |   Arenas | Plans | Trial Offers | Community Posts | Problems      |
 +-------------------------------------------------------------------+
 ```
