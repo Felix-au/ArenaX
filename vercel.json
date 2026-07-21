@@ -2,9 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "rewrites": [
-    {
-      "source": "/assets/:path*",
-      "destination": "/:path*"
-    }
+    { "source": "/robots.txt", "destination": "/assets/robots.txt" },
+    { "source": "/sitemap.xml", "destination": "/assets/sitemap.xml" },
+    { "source": "/manifest.webmanifest", "destination": "/assets/manifest.webmanifest" },
+    { "source": "/BingSiteAuth.xml", "destination": "/assets/BingSiteAuth.xml" },
+    { "source": "/googlecb84d8cd2044b548.html", "destination": "/assets/googlecb84d8cd2044b548.html" },
+    { "source": "/logo.png", "destination": "/assets/logo.png" },
+    { "source": "/logo+tagline.png", "destination": "/assets/logo+tagline.png" },
+    { "source": "/tagline.png", "destination": "/assets/tagline.png" }
   ]
 }
