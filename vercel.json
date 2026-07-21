@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/logo.png", "destination": "/assets/logo.png" },
-    { "source": "/logo+tagline.png", "destination": "/assets/logo+tagline.png" },
+    { "source": "/logo\\+tagline.png", "destination": "/assets/logo+tagline.png" },
     { "source": "/tagline.png", "destination": "/assets/tagline.png" }
   ]
 }
