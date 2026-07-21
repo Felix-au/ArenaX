@@ -121,9 +121,9 @@ The table below maps all key codebase files and directories to their functional 
 | [styles.css](file:///c:/Users/Felix/Documents/Website/ArenaX/styles.css) | CSS3 | Main design system, HSL color tokens, dark mode styles, glassmorphic card layouts, and responsive media queries. |
 | [app.js](file:///c:/Users/Felix/Documents/Website/ArenaX/app.js) | JS (ES6+) | Core application controller, `StateManager` storage fallback engine, modal handlers, dynamic render routines, and filter event bindings. |
 | [data.js](file:///c:/Users/Felix/Documents/Website/ArenaX/data.js) | JS (ES6+) | Initial datasets for problems, market opportunity stats, arena listings, trial session passes, subscription tiers, and community posts. |
-| [logo.png](file:///c:/Users/Felix/Documents/Website/ArenaX/public/logo.png) | Asset | Official primary ArenaX brand logo icon. |
-| [logo+tagline.png](file:///c:/Users/Felix/Documents/Website/ArenaX/public/logo+tagline.png) | Asset | Combined horizontal logo mark with tagline text asset. |
-| [tagline.png](file:///c:/Users/Felix/Documents/Website/ArenaX/public/tagline.png) | Asset | Standalone ArenaX tagline typography asset. |
+| [logo.png](file:///c:/Users/Felix/Documents/Website/ArenaX/assets/logo.png) | Asset | Official primary ArenaX brand logo icon. |
+| [logo+tagline.png](file:///c:/Users/Felix/Documents/Website/ArenaX/assets/logo+tagline.png) | Asset | Combined horizontal logo mark with tagline text asset. |
+| [tagline.png](file:///c:/Users/Felix/Documents/Website/ArenaX/assets/tagline.png) | Asset | Standalone ArenaX tagline typography asset. |
 | [test-browser-compatibility.html](file:///c:/Users/Felix/Documents/Website/ArenaX/test-browser-compatibility.html) | HTML Test | Automated feature detection suite testing `localStorage`, ES6 Arrow functions, CSS Grid, and Flexbox support. |
 | [test-responsive.html](file:///c:/Users/Felix/Documents/Website/ArenaX/test-responsive.html) | HTML Test | Viewport breakpoint verification runner for mobile (320px-480px), tablet (768px), and desktop views. |
 | [test-touch-interactions.html](file:///c:/Users/Felix/Documents/Website/ArenaX/test-touch-interactions.html) | HTML Test | Mobile touch event, tap target sizing, and swipe gesture interaction test runner. |

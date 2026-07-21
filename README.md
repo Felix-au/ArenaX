@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" width="150" alt="ArenaX Logo"/>
+  <img src="assets/logo.png" width="150" alt="ArenaX Logo"/>
 </p>
 <h1 align="center">ArenaX: Play More. Play Smart. Without ANY Limits.</h1>
 <p align="center">

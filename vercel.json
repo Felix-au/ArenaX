@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/public/:path*",
+      "source": "/assets/:path*",
       "destination": "/:path*"
     }
   ]
